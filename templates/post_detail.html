@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{post.title}}
+{% endblock %}
+
+
+{% block content %}
+	{{post.title}}
+{% endblock %}
+
+{% block text %}
+
+		{% for tag in tags %}
+		<span class="label label-primary">{{tags.name}}</span>
+		{% endfor %}
+
+	{{post.body}}
+{% endblock %}

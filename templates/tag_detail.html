@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{post.title}} 
+{% endblock %}
+
+
+{% block content %}
+	{{post.title }}
+	<div class="tags">
+		{% for tag in tags %}
+		<span class="label label-default">{{tags.name}}</span>
+		{% endfor %}
+	</div>
+	{{ post.body}}
+{% endblock %}
+
+{% block text %}
+	{{post.body}}
+{% endblock %}
