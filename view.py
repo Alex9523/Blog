@@ -2,7 +2,7 @@ from app import app
 from flask import render_template
 from models import Post, Tag
 from forms import PostForm
-from flask import request, redirect
+from flask import request, redirect, url_for
 from app import db
 
 
@@ -26,16 +26,16 @@ def create_post():
 	return render_template('create_post.html' , form=form)
 
 @app.route('/<slug>/edit/', methods=['POST','GET'])
-def edit_post():
-	post = Post.qoery.filter(Post.slug==slug).first()
+def edit_post(slug):
+	post = Post.query.filter(Post.slug==slug).first()
 
 	if request.method == 'POST':
 		form = PostForm(formdata=request.form, obj=post)
 		form.populate_obj(post)
 		db.session.commit()
-		return redirect(url_for('post_detail',slug = post.slug))
-	form = postForm(obj=post)
-	return render_template('edit.html', post = post, form=form)
+		return redirect(url_for('post_detail',slug=post.slug))
+	form = PostForm(obj=post)
+	return render_template('edit_post.html', post = post, form=form)
 
 
 @app.route('/main')
